@@ -4,29 +4,31 @@ import { Flex, Box, Button } from "@chakra-ui/react";
 
 export function HomePage() {
   return (
-    <Flex m={0} gap={2} p={2}>
-      <Flex
-        flexDirection={"column"}
-        gap={2}
-        basis={1}
-      >
+    <Flex direction={"column"} m={0} gap={2} p={2}>
+      <Flex gap={2} basis={1}>
         <NavLink to={"existed1"}>
           {({ isActive }) => (
-            <Button colorScheme={isActive ? "red" : "green"}>Зона A</Button>
+            <Button size={"sm"} colorScheme={isActive ? "cyan" : "yellow"}>
+              Зона A
+            </Button>
           )}
         </NavLink>
         <NavLink to={"existed2"}>
           {({ isActive }) => (
-            <Button colorScheme={isActive ? "red" : "green"}>Зона B-C</Button>
+            <Button size={"sm"} colorScheme={isActive ? "cyan" : "yellow"}>
+              Зона B-C
+            </Button>
           )}
         </NavLink>
         <NavLink to={"existed3"}>
           {({ isActive }) => (
-            <Button colorScheme={isActive ? "red" : "green"}>Зона D</Button>
+            <Button size={"sm"} colorScheme={isActive ? "cyan" : "yellow"}>
+              Зона D
+            </Button>
           )}
         </NavLink>
       </Flex>
-      <Box style={{width:'100%'}}>
+      <Box style={{ width: "100%" }}>
         <Outlet />
       </Box>
     </Flex>

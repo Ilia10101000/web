@@ -4,9 +4,9 @@ import { renderRouters } from "./utils/renderRouters";
 import { FirstMain } from "./components/firstPage/main_first";
 import { SecondMain } from "./components/secondPage/main_second";
 import { ThirdMain } from "./components/thirdPage/main_third";
-// import { createBrowserRouter } from "react-router-dom";
 import { ErrorPage } from "./components/errorPage/errorPage";
 import {HomePage} from "./components/homePage";
+import { EditPage } from "./components/firstPage/EditPage";
 
 function App() {
   const routers = [
@@ -17,6 +17,12 @@ function App() {
         {
           path: "existed1",
           element: <FirstMain />,
+          children: [
+            {
+              path: "editPage",
+              element: <EditPage />,
+            },
+          ],
         },
         {
           path: "existed2",
@@ -41,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export {App};

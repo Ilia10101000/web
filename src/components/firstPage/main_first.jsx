@@ -47,7 +47,7 @@ export function FirstMain() {
   const addNewData = (newData) => {
     if (data.some((item) => item.id === newData.id)) {
       setData((prevData) =>
-        [...prevData, newData].map((i) => {
+        prevData.map((i) => {
           if (i.id === newData.id) {
             return newData;
           } else {

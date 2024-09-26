@@ -67,7 +67,7 @@ export function FirstMain() {
         <Text fontSize={"lg"}>Особистий номер: {personalId}</Text>
       </Box>
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="striped" size='sm'>
           <TableCaption>На складі</TableCaption>
           <Thead>
             <Tr>
@@ -84,12 +84,12 @@ export function FirstMain() {
                 <Td isNumeric>{quantity}</Td>
                 <Td>
                   <Button
-                    variant="outline"
+                    colorScheme="purple"
                     onClick={() =>
                       handleChangeItemValue({ type, status, quantity, id })
                     }
                   >
-                    *
+                    ...
                   </Button>
                 </Td>
               </Tr>
@@ -104,7 +104,7 @@ export function FirstMain() {
           </Tfoot>
         </Table>
       </TableContainer>
-      <Button onClick={toogleEditPageVisibility}>Додати</Button>
+      <Button colorScheme="teal" onClick={toogleEditPageVisibility}>Додати</Button>
       {!!isHiddenEditPage && (
         <EditPage
           value={isHiddenEditPage}

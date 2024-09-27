@@ -1,18 +1,86 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Table,
   Thead,
-  Tbody,
   Tr,
   Th,
-  Td,
-  Collapse,
-  Box,
-  Button,
 } from "@chakra-ui/react";
+import {MainTableBody} from "./mainTableBody";
+
+const data = [
+  {
+    id: 1,
+    type: "Пикап",
+    s_n: "214-FDW-54G",
+    linksType: "Механiка",
+    name: "Nissan",
+    quantity: "12",
+    status: "Готовi",
+    children: [
+      {
+        id: "1",
+        s_n: "FBC-432",
+        name: "Nacaro",
+        quantity: "4",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+      {
+        id: "2",
+        s_n: "FBC-432",
+        name: "Spring",
+        quantity: "5",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+      {
+        id: "3",
+        s_n: "FBC-432",
+        name: "Fire",
+        quantity: "3",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+    ],
+  },
+  {
+    id: 2,
+    type: "Унiверсал",
+    s_n: "214-FDW-54G",
+    linksType: "Механiка",
+    name: "Toyota",
+    quantity: "21",
+    status: "Готовi",
+    children: [
+      {
+        id: "1",
+        s_n: "FBC-432",
+        name: "Camry",
+        quantity: "7",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+      {
+        id: "2",
+        s_n: "FBC-432",
+        name: "Vedro",
+        quantity: "9",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+      {
+        id: "3",
+        s_n: "FBC-432",
+        name: "Koryto",
+        quantity: "5",
+        status: "Готовi",
+        mission: "Працюють",
+      },
+    ],
+  },
+];
 
 const SecondMain = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Table>
@@ -27,52 +95,7 @@ const SecondMain = () => {
           <Th>status</Th>
         </Tr>
       </Thead>
-      <Tbody>
-        <Tr>
-          <Td>
-            {" "}
-            <Button onClick={() => setIsOpen(!isOpen)}>1</Button>
-          </Td>
-          <Td>Пикап</Td>
-          <Td>214-FDW-54G</Td>
-          <Td>Механiка</Td>
-          <Td>Nissan</Td>
-          <Td>12</Td>
-          <Td>Готовi</Td>
-        </Tr>
-        {isOpen && (
-          <Tr>
-            <Td colSpan={7}>
-              {/* <Collapse in={isOpen}> */}
-                <Box padding="4" color="white" mt="4" bg="blue.500">
-                  Here are the details for Item 1.
-                </Box>
-              {/* </Collapse> */}
-            </Td>
-          </Tr>
-        )}
-        <Tr>
-          <Td>
-            {" "}
-            <Button onClick={() => setIsOpen(!isOpen)}>1</Button>
-          </Td>
-          <Td>Пикап</Td>
-          <Td>214-FDW-54G</Td>
-          <Td>Механiка</Td>
-          <Td>Nissan</Td>
-          <Td>12</Td>
-          <Td>Готовi</Td>
-        </Tr>
-        <Tr>
-          <Td colSpan={7}>
-            <Collapse in={isOpen}>
-              <Box padding="4" color="white" mt="4" bg="blue.500">
-                Here are the details for Item 1.
-              </Box>
-            </Collapse>
-          </Td>
-        </Tr>
-      </Tbody>
+      <MainTableBody data={data}/>
     </Table>
   );
 };

@@ -16,7 +16,7 @@ export function SubTableBody({ children, parent }) {
       </Thead>
       <Tbody>
         {children.map(({ id, s_n, name, quantity, status, mission }) => (
-          <Tr>
+          <Tr key={id}>
             <Td>{id}</Td>
             <Td>{s_n}</Td>
             <Td>{name}</Td>

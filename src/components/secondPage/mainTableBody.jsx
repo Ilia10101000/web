@@ -7,7 +7,7 @@ export function MainTableBody({ data }) {
   return (
     <Tbody>
       {data.map((item) => (
-        <MainTableBodyRow rowData={item}/>
+        <MainTableBodyRow rowData={item} key={item.id}/>
       ))}
     </Tbody>
   );

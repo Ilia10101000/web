@@ -18,7 +18,7 @@ export function MainTableBodyRow({ rowData }) {
       </Tr>
       {isOpen && (
         <Tr>
-          <Td colSpan={7}>
+          <Td colSpan={9}>
             <SubTableBody children={rowData.children} />
           </Td>
         </Tr>

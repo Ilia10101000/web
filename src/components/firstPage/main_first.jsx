@@ -17,13 +17,6 @@ import { EditPage } from "./EditPage";
 
 let subdivision = "5";
 let personalId = "032-HF12";
-let availableStatusList = [
-  { priority: "1", status: "В наявності" },
-  { priority: "2", status: "Готові до застосування" },
-  { priority: "3", status: "В ремонті" },
-  { priority: "4", status: "Використано" },
-  { priority: "4", status: "Знищено" },
-];
 
 export function FirstMain() {
   const [editableRowData, setEditableRowData] = useState(null);
@@ -51,8 +44,18 @@ export function FirstMain() {
   const handleChangeItemValue = (data) => setEditableRowData(data);
   const hideEditForm = () => setEditableRowData(null);
 
-  const addNewData = (newData) => {
-    setData((prevValue) => [...prevValue, newData]);
+  const addNewData = ({ newRowData, changedRowId }) => {
+    let changedData = data.map((row) => {
+      if (row.id === changedRowId) {
+        return {
+          ...row,
+          quantity: String(+row.quantity - +newRowData.quantity),
+        };
+      } else {
+        return row;
+      }
+    });
+    setData([...changedData, newRowData]);
   };
 
   return (

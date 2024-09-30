@@ -23,13 +23,24 @@ const handleChange_blockLetter_E = (event) => {
 
 const id = String(Date.now());
 
-let availableStatusList = [
-  { priority: "1", status: "В наявності" },
-  { priority: "2", status: "Готові до застосування" },
-  { priority: "3", status: "В ремонті" },
-  { priority: "4", status: "Використано" },
-  { priority: "4", status: "Знищено" },
-];
+let availableStatusList = {
+  "В наявності": [
+    "Готові до застосування",
+    "В ремонті",
+    "Використано",
+    "Знищено",
+  ],
+  "Готові до застосування": ["В ремонті", "Використано", "Знищено"],
+
+  "В ремонті": [
+    "Готові до застосування",
+    "В наявності",
+    "Використано",
+    "Знищено",
+  ],
+  Використано: [],
+  Знищено: [],
+};
 
 export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
   const [data, setData] = useState(value);
@@ -38,21 +49,8 @@ export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
     return !Object.keys(data).some((key) => data[key].trim() !== value[key]);
   };
 
-  const getStatusPriority = () => {
-    let searchedPriority;
-    for( let item of availableStatusList){
-      if (item.status === value.status) {
-        searchedPriority = item.priority;
-        break;
-      }
-    }
-    return searchedPriority
-  }
-
-  console.log(getStatusPriority())
-
   return (
-    <AlertDialog isOpen={true} onClose={() => console.log("Click")}>
+    <AlertDialog isOpen={true} onClose={handleClickCancel}>
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
@@ -62,8 +60,8 @@ export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
           <AlertDialogBody
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
-            <Text>Підтип: {data.type}</Text>
-            <Text>Поточний статус: {data.status}</Text>
+            <Text>Підтип: {value.type}</Text>
+            <Text>Поточний статус: {value.status}</Text>
             <Box>
               <Text>Змінити на статус:</Text>
               <Select
@@ -72,7 +70,7 @@ export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
                   setData((prev) => ({ ...prev, status: e.target.value }))
                 }
               >
-                {availableStatusList.map(({ status }) => (
+                {availableStatusList[value.status].map((status) => (
                   <option key={status} value={status}>
                     {status}
                   </option>
@@ -81,9 +79,9 @@ export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
             </Box>
             <NumberInput
               min={1}
-              max={1000}
+              max={value.quantity}
               inputMode="decimal"
-              value={value.quantity}
+              value={data.quantity}
               onChange={(quantity) =>
                 setData((prev) => ({ ...prev, quantity }))
               }
@@ -100,9 +98,10 @@ export function EditPage({ handleClickCancel, handleConfirmAddData, value }) {
               isDisabled={isActiveConfirmButton()}
               colorScheme="blue"
               onClick={async () => {
-                await handleConfirmAddData(
-                  data.id ? data : { ...data, id: String(Date.now()) }
-                );
+                await handleConfirmAddData({
+                  newRowData: { ...data, id: String(Date.now()) },
+                  changedRowId: value.id,
+                });
                 handleClickCancel();
               }}
               ml={3}
